@@ -147,7 +147,7 @@ body {
 .cbs-hero {
   position: relative;
   height: 600px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1596422846543-74c6fc0e285d?q=80&w=1600&auto=format&fit=crop');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://neighbors.columbia.edu/sites/neighbors.columbia.edu/files/styles/cu_crop/public/content/03-columbia-business-school-iwan-baan-1597-neighbors.jpeg?itok=Vmp_kLiR');
   background-size: cover;
   background-position: center;
   display: flex;
