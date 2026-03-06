@@ -1,0 +1,23 @@
+.widgetContainer {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+    /* Let clicks pass through container */
+}
+
+.widgetContainer>* {
+    pointer-events: auto;
+    /* Enable clicks on the children */
+}
+
+@media (max-width: 768px) {
+    .widgetContainer {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}

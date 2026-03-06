@@ -1,0 +1,307 @@
+:root {
+  /* CBS Brand Colors */
+  --cbs-primary-blue: #003366;
+  --cbs-secondary-blue: #0087CD;
+  /* Brighter Blue for accents */
+  --cbs-text-primary: #1E1E1E;
+  --cbs-text-secondary: #555555;
+  --cbs-bg-white: #FFFFFF;
+  --cbs-footer-bg: #F2F2F2;
+  --cbs-footer-bottom-bg: #E6E6E6;
+  --cbs-border: #E0E0E0;
+
+  /* Backward Compatibility for ChatWidget */
+  --columbia-blue: #0087CD;
+  --columbia-blue-hover: #006CA5;
+  --text-primary: #1E1E1E;
+  --text-secondary: #555555;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --bg-color-secondary: #FFFFFF;
+
+  /* Fonts */
+  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--cbs-bg-white);
+  color: var(--cbs-text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Replica UI Styles */
+.replica-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cbs-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cbs-bg-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cbs-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 80px;
+  border-bottom: 1px solid var(--cbs-border);
+}
+
+.cbs-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--cbs-primary-blue);
+}
+
+.cbs-global-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cbs-global-nav a {
+  text-decoration: none;
+  color: var(--cbs-text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.cbs-global-nav a:hover {
+  color: var(--cbs-primary-blue);
+}
+
+.cbs-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--cbs-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cbs-sub-nav {
+  background: var(--cbs-bg-white);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.emba-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.emba-nav a {
+  text-decoration: none;
+  color: var(--cbs-text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.emba-nav a:hover {
+  color: var(--cbs-primary-blue);
+}
+
+.cbs-apply-link {
+  margin-left: auto;
+  background: var(--cbs-primary-blue);
+  color: var(--cbs-bg-white) !important;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.cbs-apply-link:hover {
+  background: #002244;
+}
+
+/* Main Content */
+.cbs-main {
+  flex: 1;
+}
+
+.cbs-hero {
+  position: relative;
+  height: 600px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://business.columbia.edu/sites/default/files/styles/hero_image_desktop/public/2023-01/EMBA_Hero.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 0 4rem;
+}
+
+.cbs-hero-content {
+  max-width: 800px;
+}
+
+.cbs-hero-heading {
+  font-family: var(--font-serif);
+  font-weight: bold;
+  font-size: 8rem;
+  color: var(--cbs-bg-white);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -2px;
+}
+
+.cbs-hero-subheading {
+  font-size: 1.5rem;
+  color: var(--cbs-bg-white);
+  font-weight: 500;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+}
+
+/* Advantage Section */
+.cbs-advantage-section {
+  padding: 4rem;
+  background: var(--cbs-bg-white);
+}
+
+.cbs-advantage-title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--cbs-text-primary);
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--cbs-border);
+}
+
+.cbs-advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.cbs-advantage-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cbs-advantage-card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--cbs-text-primary);
+}
+
+.cbs-advantage-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  background-color: #f0f0f0;
+}
+
+.cbs-advantage-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--cbs-text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.cbs-footer-top {
+  background: var(--cbs-footer-bg);
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cbs-footer-top p {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--cbs-primary-blue);
+  font-weight: bold;
+}
+
+.cbs-footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.cbs-footer-links a {
+  text-decoration: none;
+  color: var(--cbs-text-secondary);
+  font-size: 0.9rem;
+}
+
+.cbs-footer-bottom {
+  background: var(--cbs-footer-bottom-bg);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--cbs-text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .cbs-advantage-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cbs-global-nav a {
+    display: none;
+  }
+
+  .cbs-hero {
+    height: 400px;
+    padding: 0 2rem;
+  }
+
+  .cbs-hero-heading {
+    font-size: 4rem;
+  }
+
+  .cbs-hero-subheading {
+    font-size: 1.2rem;
+  }
+
+  .emba-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .cbs-apply-link {
+    display: none;
+  }
+
+  .cbs-advantage-section {
+    padding: 2rem;
+  }
+
+  .cbs-advantage-grid {
+    grid-template-columns: 1fr;
+  }
+}
