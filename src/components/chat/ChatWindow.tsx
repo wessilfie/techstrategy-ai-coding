@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import styles from './ChatWindow.module.css';
 
 interface Message {
@@ -254,7 +255,7 @@ export default function ChatWindow({ onClose, mode = 'ai' }: ChatWindowProps) {
                             </div>
                         )}
                         <div className={`${styles.message} ${msg.role === 'user' ? styles.messageUser : styles.messageBot}`}>
-                            {msg.content}
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
                         </div>
                     </div>
                 ))}
