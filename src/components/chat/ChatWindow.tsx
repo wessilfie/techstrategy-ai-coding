@@ -9,7 +9,6 @@ interface Message {
 
 interface ChatWindowProps {
     onClose: () => void;
-    apiKey?: string;
     mode?: 'ai' | 'simulated';
 }
 
@@ -89,7 +88,7 @@ const SIMULATED_BANK: Record<string, string[]> = {
     ]
 };
 
-export default function ChatWindow({ onClose, apiKey, mode = 'ai' }: ChatWindowProps) {
+export default function ChatWindow({ onClose, mode = 'ai' }: ChatWindowProps) {
     const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -163,12 +162,26 @@ export default function ChatWindow({ onClose, apiKey, mode = 'ai' }: ChatWindowP
         }
 
         try {
-            const allMessages = [...messages, userMsg];
-            const recentMessages = allMessages.slice(-10);
-            const res = await fetch('/api/chat', {
+            const apiMessages = [...messages, userMsg].map(m => ({
+                role: m.role === 'bot' ? 'assistant' : 'user',
+                content: m.content
+            }));
+
+            // Send only the 10 most recent messages
+            const recentMessages = apiMessages.slice(-10);
+
+            const payload = {
+                passcode: "CBS-EMBA-2026",
+                messages: [
+                    { role: "system", content: "You are Aria, a helpful admissions team member for Columbia Business School EMBA. Answer questions friendly, professionally, and concisely." },
+                    ...recentMessages
+                ]
+            };
+
+            const res = await fetch('https://class-proxy.vercel.app/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: recentMessages })
+                body: JSON.stringify(payload)
             });
 
             if (!res.ok) {
@@ -179,7 +192,7 @@ export default function ChatWindow({ onClose, apiKey, mode = 'ai' }: ChatWindowP
 
             setMessages(prev => [
                 ...prev,
-                { id: (Date.now() + 1).toString(), role: 'bot', content: data.reply }
+                { id: (Date.now() + 1).toString(), role: 'bot', content: data.text }
             ]);
         } catch (error) {
             console.error(error);

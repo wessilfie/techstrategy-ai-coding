@@ -6,11 +6,10 @@ import ChatWindow from './ChatWindow';
 import styles from './ChatWidget.module.css';
 
 interface ChatWidgetProps {
-    apiKey?: string;
     mode?: 'ai' | 'simulated';
 }
 
-export default function ChatWidget({ apiKey, mode = 'ai' }: ChatWidgetProps) {
+export default function ChatWidget({ mode = 'ai' }: ChatWidgetProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [showPreview, setShowPreview] = useState(false);
 
@@ -44,7 +43,6 @@ export default function ChatWidget({ apiKey, mode = 'ai' }: ChatWidgetProps) {
             {isOpen && (
                 <ChatWindow
                     onClose={toggleChat}
-                    apiKey={apiKey}
                     mode={mode}
                 />
             )}
