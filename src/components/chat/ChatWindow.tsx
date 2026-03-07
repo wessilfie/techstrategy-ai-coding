@@ -163,10 +163,12 @@ export default function ChatWindow({ onClose, apiKey, mode = 'ai' }: ChatWindowP
         }
 
         try {
+            const allMessages = [...messages, userMsg];
+            const recentMessages = allMessages.slice(-10);
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: [...messages, userMsg], apiKey })
+                body: JSON.stringify({ messages: recentMessages })
             });
 
             if (!res.ok) {

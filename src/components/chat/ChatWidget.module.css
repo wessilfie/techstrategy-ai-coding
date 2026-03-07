@@ -21,3 +21,10 @@
         right: 1rem;
     }
 }
+
+@media (max-width: 480px) {
+    .widgetContainer {
+        bottom: 0;
+        right: 0;
+    }
+}
