@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
 
 const SYSTEM_PROMPT = `
 You are Aria, an admissions support assistant for Columbia Business School's EMBA program.
@@ -25,43 +24,37 @@ Never volunteer that you are an AI, a bot, or automated. Do not include any "pow
 
 export async function POST(req: Request) {
     try {
-        const { messages, apiKey } = await req.json();
+        const { messages } = await req.json();
 
-        if (!apiKey && !process.env.OPENAI_API_KEY) {
-            return NextResponse.json(
-                { reply: "Please provide an OpenAI API key to chat with Aria." },
-                { status: 401 }
-            );
+        // Build messages array: system prompt + last 10 conversation messages
+        const recentMessages = messages.slice(-10);
+        const payload = {
+            passcode: 'CBS-EMBA-2026',
+            messages: [
+                { role: 'system', content: SYSTEM_PROMPT },
+                ...recentMessages.map((msg: { role: string; content: string }) => ({
+                    role: msg.role === 'bot' ? 'assistant' : msg.role,
+                    content: msg.content,
+                })),
+            ],
+        };
+
+        const res = await fetch('https://class-proxy.vercel.app/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Class proxy returned ${res.status}`);
         }
 
-        // Initialize the OpenAI client per request
-        const openai = new OpenAI({
-            apiKey: apiKey || process.env.OPENAI_API_KEY,
-        });
-
-        // Format messages for OpenAI
-        // The incoming messages have { role: 'user' | 'bot', content: string }
-        // We need to map 'bot' to 'assistant'
-        const formattedMessages = [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...messages.map((msg: any) => ({
-                role: msg.role === 'bot' ? 'assistant' : msg.role,
-                content: msg.content,
-            }))
-        ];
-
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-4o-mini', // Closest to requested "gpt-4.1 nano"
-            messages: formattedMessages,
-            temperature: 0.7,
-            max_tokens: 400,
-        });
-
-        const reply = completion.choices[0]?.message?.content || "I'm sorry, I couldn't process that.";
+        const data = await res.json();
+        const reply = data.text || "I'm sorry, I couldn't process that.";
 
         return NextResponse.json({ reply });
     } catch (error) {
-        console.error('OpenAI Error:', error);
+        console.error('Chat proxy error:', error);
         return NextResponse.json(
             { reply: "I'm having a little trouble connecting right now. Please try again in a moment." },
             { status: 500 }
